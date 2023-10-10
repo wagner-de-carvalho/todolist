@@ -1,14 +1,30 @@
 package br.com.wagnercarvalho.todolist.user;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Getter
-@Setter
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Data
+@Entity(name = "users")
 public class UserModel {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
+
+    @Column(unique = true)
     private String username;
     private String name;
     private String password;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Override
     public String toString() {
